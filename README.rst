@@ -8,7 +8,7 @@ them to Graphite.
 If you have Docker installed, you can try it out with::
 
    docker build -t collectd-graphite . # from the root of this repository
-   docker run collectd-graphite
+   docker run -P collectd-graphite
 
 Then, using ``docker ps``, write down which port has been assigned to collectd
 and which one has been assigned to the web interface.
