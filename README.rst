@@ -13,6 +13,10 @@ If you have Docker installed, you can try it out with::
 Then, using ``docker ps``, write down which port has been assigned to collectd
 and which one has been assigned to the web interface.
 
+For example ``docker port <container_id> 8080`` will give you the port for the
+Graphite UI, and ``docker port <container_id> 25826`` the port to configure
+in your ``collectd.conf``.
+
 Install collectd using your favorite package manager, open ``collectd.conf`` and
 add::
 
