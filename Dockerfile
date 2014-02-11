@@ -11,6 +11,7 @@ RUN adduser --system --group --no-create-home collectd && adduser --system --hom
 RUN sudo -u graphite virtualenv --system-site-packages ~graphite/env
 ADD graphite/requirements.txt /opt/graphite/
 RUN sudo -u graphite HOME=/opt/graphite /bin/sh -c ". ~/env/bin/activate && pip install -r /opt/graphite/requirements.txt"
+RUN sudo -u graphite HOME=/opt/graphite /bin/sh -c ". ~/env/bin/activate && pip install 'Twisted<12.0'"
 
 ADD collectd/collectd.conf /etc/collectd/
 ADD supervisor/ /etc/supervisor/conf.d/
