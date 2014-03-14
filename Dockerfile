@@ -1,5 +1,4 @@
-FROM lopter/raring-base:latest
-MAINTAINER Louis Opter <louis@dotcloud.com>
+FROM ubuntu:precise
 
 RUN apt-get update && apt-get install -y python-cairo collectd libgcrypt11 python-virtualenv supervisor sudo build-essential python-dev openssh-server openssh-client && apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 RUN mkdir /var/run/sshd
@@ -11,7 +10,8 @@ RUN adduser --system --group --no-create-home collectd && adduser --system --hom
 RUN sudo -u graphite virtualenv --system-site-packages ~graphite/env
 ADD graphite/requirements.txt /opt/graphite/
 RUN sudo -u graphite HOME=/opt/graphite /bin/sh -c ". ~/env/bin/activate && pip install -r /opt/graphite/requirements.txt"
-RUN sudo -u graphite HOME=/opt/graphite /bin/sh -c ". ~/env/bin/activate && pip install 'Twisted<12.0'"
+#RUN sudo -u graphite HOME=/opt/graphite /bin/sh -c ". ~/env/bin/activate && pip install --upgrade django"
+#RUN sudo -u graphite HOME=/opt/graphite /bin/sh -c ". ~/env/bin/activate && pip install 'Twisted<12.0'"
 
 ADD collectd/collectd.conf /etc/collectd/
 ADD supervisor/ /etc/supervisor/conf.d/
